@@ -49,10 +49,10 @@
                     </div>
                 </form>
 
-                <button class="add-btn" id="add-tool-btn">
+                <a href="/ferramentas/cadastrar" class="add-btn">
                     <i class="fas fa-plus"></i>
                     Cadastrar Nova Ferramenta
-                </button>
+                </a>
             </div>
 
             <div class="tools-grid" id="tools-grid">
@@ -93,10 +93,10 @@
                         <div class="tool-price">R$ <span th:text="${ferramenta.preco}"></span></div>
                     </div>
                     <div class="tool-actions">
-                        <button class="edit-btn" data-id="${tool.id}">
+                        <a th:href="@{'/ferramentas/editar/' + ${ferramenta.id}}" class="edit-btn" data-id="${tool.id}">
                             <i class="fas fa-edit"></i>
                             Editar
-                        </button>
+                        </a>
                         <button class="delete-btn" data-id="${tool.id}">
                             <i class="fas fa-trash"></i>
                             Deletar

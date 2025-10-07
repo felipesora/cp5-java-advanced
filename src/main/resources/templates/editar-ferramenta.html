@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Ferramenta - Gestão de Ferramentas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/global.css}" />
+    <link rel="stylesheet" th:href="@{/css/cadastrar-ferramenta.css}" />
+</head>
+<body>
+
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<main class="main_cadastro">
+    <div class="container_cadastro">
+        <div class="form-container">
+            <div class="form-header">
+                <i class="fas fa-plus-circle"></i>
+                <h1>Editar Ferramenta</h1>
+            </div>
+
+            <div class="form-body">
+
+                <form id="tool-form" th:action="@{'/ferramentas/editar/' + ${ferramenta.id}}" th:object="${ferramenta}" method="post">
+                    <div class="form-group">
+                        <label for="tool-name">
+                            <i class="fas fa-toolbox"></i>
+                            Nome da Ferramenta
+                        </label>
+                        <input type="text" class="form-control" id="tool-name" th:field="*{nome}" placeholder="Ex: Alicate Universal" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tool-description">
+                            <i class="fas fa-align-left"></i>
+                            Descrição
+                        </label>
+                        <textarea class="form-control" id="tool-description" th:field="*{descricao}" placeholder="Descreva a ferramenta e suas funcionalidades"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tool-category">
+                                <i class="fas fa-tag"></i>
+                                Categoria
+                            </label>
+                            <input type="text" class="form-control" id="tool-category" th:field="*{categoria}" placeholder="Ex: Alicates, Martelos, Furadeiras" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tool-brand">
+                                <i class="fas fa-industry"></i>
+                                Marca
+                            </label>
+                            <input type="text" class="form-control" id="tool-brand" th:field="*{marca}" placeholder="Ex: Tramontina, Bosch, Stanley" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="tool-price">
+                                <i class="fas fa-tag"></i>
+                                Preço (R$)
+                            </label>
+                            <input type="number" class="form-control" id="tool-price" th:field="*{preco}" step="0.01" placeholder="0,00" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tool-quantity">
+                                <i class="fas fa-boxes"></i>
+                                Quantidade em Estoque
+                            </label>
+                            <input type="number" class="form-control" id="tool-quantity" th:field="*{quantidade}" placeholder="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <a href="/ferramentas" class="cancel-btn">
+                            <i class="fas fa-times"></i>
+                            Cancelar
+                        </a>
+                        <button type="submit" class="save-btn">
+                            <i class="fas fa-save"></i>
+                            Editar Ferramenta
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: footerFragment"></div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("tool-form");
+
+      form.addEventListener("submit", (event) => {
+        // Evita envio inicial
+        event.preventDefault();
+
+        // Captura campos
+        const nome = document.getElementById("tool-name");
+        const descricao = document.getElementById("tool-description");
+        const categoria = document.getElementById("tool-category");
+        const marca = document.getElementById("tool-brand");
+        const preco = document.getElementById("tool-price");
+        const quantidade = document.getElementById("tool-quantity");
+
+        // Remove mensagens antigas
+        document.querySelectorAll(".error-message").forEach(e => e.remove());
+
+        // Validações
+        let valido = true;
+
+        // Função para mostrar erro abaixo do campo
+        const mostrarErro = (campo, mensagem) => {
+          const erro = document.createElement("div");
+          erro.classList.add("error-message");
+          erro.style.color = "red";
+          erro.style.marginTop = "5px";
+          erro.style.fontSize = "14px";
+          erro.textContent = mensagem;
+          campo.insertAdjacentElement("afterend", erro);
+          valido = false;
+        };
+
+        // Regras baseadas na sua entidade
+        if (!nome.value.trim()) {
+          mostrarErro(nome, "O nome é obrigatório.");
+        } else if (nome.value.length > 100) {
+          mostrarErro(nome, "O nome deve ter no máximo 100 caracteres.");
+        }
+
+        if (!descricao.value.trim()) {
+          mostrarErro(descricao, "A descrição é obrigatória.");
+        } else if (descricao.value.length > 150) {
+          mostrarErro(descricao, "A descrição deve ter no máximo 150 caracteres.");
+        }
+
+        if (!categoria.value.trim()) {
+          mostrarErro(categoria, "A categoria é obrigatória.");
+        } else if (categoria.value.length > 40) {
+          mostrarErro(categoria, "A categoria deve ter no máximo 40 caracteres.");
+        }
+
+        if (!marca.value.trim()) {
+          mostrarErro(marca, "A marca é obrigatória.");
+        } else if (marca.value.length > 40) {
+          mostrarErro(marca, "A marca deve ter no máximo 40 caracteres.");
+        }
+
+        if (!preco.value.trim()) {
+          mostrarErro(preco, "O preço é obrigatório.");
+        } else if (parseFloat(preco.value) <= 0) {
+          mostrarErro(preco, "O preço deve ser maior que zero.");
+        }
+
+        if (!quantidade.value.trim()) {
+          mostrarErro(quantidade, "A quantidade é obrigatória.");
+        } else if (parseInt(quantidade.value) < 0) {
+          mostrarErro(quantidade, "A quantidade não pode ser negativa.");
+        }
+
+        // Se estiver tudo certo, envia o formulário
+        if (valido) {
+          form.submit();
+        }
+      });
+    });
+</script>
+</body>
+</html>
