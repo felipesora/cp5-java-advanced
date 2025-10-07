@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Ferramentas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/global.css}" />
+    <link rel="stylesheet" th:href="@{/css/ferramentas.css}" />
+</head>
+<body>
+    <div th:replace="fragments/header :: headerFragment"></div>
+
+    <main>
+        <div class="container">
+            <div class="dashboard">
+                <div class="dashboard-card">
+                    <div class="dashboard-info">
+                        <h3>Total de Ferramentas</h3>
+                        <div class="count" id="total-tools" th:text="${quantidade}">10</div>
+                    </div>
+                    <div class="dashboard-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-bar">
+                <form th:action="@{/ferramentas}" method="get">
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="filter-name">Nome</label>
+                            <input type="text" class="filter-input" id="filter-name" name="nome" placeholder="Digite o nome da ferramenta" th:value="${param.nome}">
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-category">Categoria</label>
+                            <input type="text" class="filter-input" id="filter-category" name="categoria" placeholder="Digite a categoria" th:value="${param.categoria}">
+                        </div>
+                        <div class="filter-actions">
+                            <button class="filter-btn" id="apply-filter" type="submit">
+                                <i class="fas fa-filter"></i>
+                                Filtrar
+                            </button>
+                            <button class="clear-btn" id="clear-filter">
+                                <i class="fas fa-times"></i>
+                                Limpar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <button class="add-btn" id="add-tool-btn">
+                    <i class="fas fa-plus"></i>
+                    Cadastrar Nova Ferramenta
+                </button>
+            </div>
+
+            <div class="tools-grid" id="tools-grid">
+                <div class="empty-state" th:if="${mensagemVazio}">
+                        <i class="fas fa-tools"></i>
+                        <h3>Nenhuma ferramenta cadastrada</h3>
+                </div>
+
+                <div class="empty-state" th:if="${mensagemFiltro}">
+                    <i class="fas fa-tools"></i>
+                    <h3>Nenhuma ferramenta encontrada</h3>
+                    <p>Não há ferramentas correspondentes aos filtros aplicados. Tente ajustar os critérios de busca.</p>
+                </div>
+
+                <div class="tool-card" th:each="ferramenta : ${ferramentas}">
+                    <div class="tool-header">
+                        <h3 th:text="${ferramenta.nome}">Nome</h3>
+                        <div class="tool-category" th:text="${ferramenta.categoria}">
+                            <i class="fas fa-tag"></i>
+                            Categoria
+                        </div>
+                    </div>
+                    <div class="tool-body">
+                        <div class="tool-info">
+                            <div class="tool-info-item">
+                                <i class="fas fa-align-left"></i>
+                                <span th:text="${ferramenta.descricao}">Descrição</span>
+                            </div>
+                            <div class="tool-info-item">
+                                <i class="fas fa-industry"></i>
+                                <span th:text="${ferramenta.marca}">Marca</span>
+                            </div>
+                            <div class="tool-info-item">
+                                <i class="fas fa-boxes"></i>
+                                <span>Quantidade: </span> <span th:text="${ferramenta.quantidade}"></span>
+                            </div>
+                        </div>
+                        <div class="tool-price">R$ <span th:text="${ferramenta.preco}"></span></div>
+                    </div>
+                    <div class="tool-actions">
+                        <button class="edit-btn" data-id="${tool.id}">
+                            <i class="fas fa-edit"></i>
+                            Editar
+                        </button>
+                        <button class="delete-btn" data-id="${tool.id}">
+                            <i class="fas fa-trash"></i>
+                            Deletar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer :: footerFragment"></div>
+
+    <script>
+        const clearBtn = document.getElementById('clear-filter');
+
+        clearBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          window.location.href = '/ferramentas';
+        })
+    </script>
+</body>
+</html>
