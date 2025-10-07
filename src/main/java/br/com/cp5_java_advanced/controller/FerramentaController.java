@@ -57,4 +57,10 @@ public class FerramentaController {
         ferramentaService.atualizar(id, ferramenta);
         return "redirect:/ferramentas";
     }
+
+    @GetMapping("/deletar/{id}")
+    public String deletar(@PathVariable Long id) {
+        ferramentaService.deletar(id);
+        return "redirect:/ferramentas";
+    }
 }

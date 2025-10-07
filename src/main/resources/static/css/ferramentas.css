@@ -336,3 +336,136 @@ main {
     order: -1;
   }
 }
+
+/* Modal */
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-conteudo {
+    background-color: white;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    animation: modalAppear 0.3s ease-out;
+}
+
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-conteudo h3 {
+    background-color: #1E293B;
+    color: white;
+    padding: 20px 25px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+}
+
+.modal-conteudo h3 i {
+    color: #EF4444;
+}
+
+.modal-conteudo p {
+    padding: 25px;
+    font-size: 16px;
+    color: #1E293B;
+    text-align: center;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.modal-botoes {
+    display: flex;
+    padding: 0 25px 25px;
+    gap: 12px;
+}
+
+.modal-botoes .btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.modal-botoes .btn_excluir {
+    background-color: #EF4444;
+    color: white;
+}
+
+.modal-botoes .btn_excluir:hover {
+    background-color: #DC2626;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.modal-botoes .btn_cancelar {
+    background-color: white;
+    color: #64748B;
+    border: 1px solid #E2E8F0;
+}
+
+.modal-botoes .btn_cancelar:hover {
+    background-color: #F8FAFC;
+    color: #1E293B;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .modal-botoes {
+        flex-direction: column;
+    }
+
+    .modal-conteudo h3 {
+        padding: 15px 20px;
+        font-size: 18px;
+    }
+
+    .modal-conteudo p {
+        padding: 20px;
+    }
+
+    .modal-botoes {
+        padding: 0 20px 20px;
+    }
+}
