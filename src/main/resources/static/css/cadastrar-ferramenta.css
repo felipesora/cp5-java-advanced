@@ -1,7 +1,5 @@
 /* Main Content */
 .main_cadastro {
-    padding: 30px 0;
-    min-height: calc(100vh - 140px);
     display: flex;
     justify-content: center;
     align-items: center;

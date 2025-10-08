@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastrar Usuário - Gestão de Ferramentas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/global.css}" />
+    <link rel="stylesheet" th:href="@{/css/cadastro-usuario.css}" />
+    <script th:src="@{/js/form-usuario.js}" defer></script>
+</head>
+<body>
+    <div th:replace="fragments/header :: headerFragment"></div>
+
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <div class="page-title">
+                    <i class="fas fa-user-plus"></i>
+                    <h1>Cadastrar Novo Usuário</h1>
+                </div>
+            </div>
+
+            <div class="form-container">
+                <div class="form-header">
+                    <div class="form-header-content">
+                        <i class="fas fa-user-cog form-icon"></i>
+                        <div class="form-header-text">
+                            <h2>Dados do Usuário</h2>
+                            <p>Preencha as informações para criar uma nova conta de usuário</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-body">
+                    <div class="error-message" id="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="error-text">Erro no cadastro. Verifique os dados informados.</span>
+                    </div>
+                    
+                    <div class="success-message" id="success-message">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Usuário cadastrado com sucesso!</span>
+                    </div>
+                    
+                    <form id="user-form" th:action="@{/usuarios/cadastrar}" th:object="${usuarioDTO}" method="post">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label for="nome">
+                                    <i class="fas fa-user"></i>
+                                    Nome Completo
+                                </label>
+                                <input type="text" class="form-control" id="nome" th:field="*{nome}" placeholder="Digite o nome completo" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">
+                                    <i class="fas fa-envelope"></i>
+                                    E-mail
+                                </label>
+                                <input type="email" class="form-control" id="email" th:field="*{email}" placeholder="Digite o e-mail" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="senha">
+                                    <i class="fas fa-key"></i>
+                                    Senha
+                                </label>
+                                <input type="password" class="form-control" id="senha" th:field="*{senha}" placeholder="Defina uma senha" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="perfil">
+                                    <i class="fas fa-user-tag"></i>
+                                    Tipo de Perfil
+                                </label>
+                                <select class="form-control" id="perfil" th:field="*{perfil}" required>
+                                    <option value="">Selecione o perfil</option>
+                                    <option value="ADMIN">Administrador</option>
+                                    <option value="COMUM">Usuário Comum</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="permission-info">
+                            <h4><i class="fas fa-info-circle"></i> Informações sobre os perfis:</h4>
+                            <ul>
+                                <li>
+                                    <i class="fas fa-shield-alt"></i>
+                                    <strong>Administrador <span class="permission-badge badge-admin">ADMIN</span></strong>
+                                    <br>
+                                    <span>Acesso completo ao sistema, incluindo gestão de usuários, ferramentas e configurações.</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-user"></i>
+                                    <strong>Usuário Comum <span class="permission-badge badge-comum">COMUM</span></strong>
+                                    <br>
+                                    <span>Acesso básico para visualizar e gerenciar ferramentas, sem permissões administrativas.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="container_mensagem_erro_validacao" id="validacaoMensagem"></div>
+
+                        <div class="container_mensagem_cadastro_sucesso" id="cadastroSucesso" th:if="${mensagemSucesso}">
+                            <p th:text="${mensagemSucesso}"></p>
+                        </div>
+
+                        <div class="container_mensagem_cadastro_erro" id="loginMessage" th:if="${mensagemErro}">
+                            <p th:text="${mensagemErro}"></p>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <a href="/usuarios" class="cancel-btn">
+                                <i class="fas fa-times"></i>
+                                Cancelar
+                            </a>
+                            <button type="submit" class="save-btn">
+                                <i class="fas fa-save"></i>
+                                Cadastrar Usuário
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div th:replace="fragments/footer :: footerFragment"></div>
+</body>
+</html>

@@ -1,0 +1,262 @@
+/* Main Content */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.page-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.page-title h1 {
+    font-size: 28px;
+    color: var(--primary-color);
+}
+
+.page-title i {
+    color: var(--accent-color);
+    font-size: 32px;
+}
+
+/* Form Container */
+.form-container {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.form-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 25px 30px;
+}
+
+.form-header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.form-icon {
+    font-size: 32px;
+    color: var(--accent-color);
+}
+
+.form-header-text h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.form-header-text p {
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+.form-body {
+    padding: 30px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-group label i {
+    color: var(--accent-color);
+    width: 16px;
+}
+
+.form-control {
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s;
+    font-size: 16px;
+    background-color: #F8FAFC;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background-color: white;
+}
+
+select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+}
+
+.permission-info {
+    background-color: #F8FAFC;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.permission-info h4 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.permission-info ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.permission-info li {
+    margin-bottom: 8px;
+    color: var(--text-light);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.permission-info li i {
+    color: var(--accent-color);
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.permission-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.badge-admin {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--accent-color);
+}
+
+.badge-comum {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    padding-top: 25px;
+    border-top: 1px solid var(--border-color);
+}
+
+.cancel-btn {
+    background-color: white;
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cancel-btn:hover {
+    background-color: #F8FAFC;
+    color: var(--text-color);
+}
+
+.save-btn {
+    background-color: var(--success-color);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.save-btn:hover {
+    background-color: #0DA271;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.container_mensagem_erro_validacao, .container_mensagem_cadastro_erro {
+  margin: 5px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 14px;
+  color: var(--danger-color);
+}
+
+.container_mensagem_cadastro_sucesso {
+  margin: 5px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: left;
+  font-size: 14px;
+  color: var(--success-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        flex-direction: column;
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+}
