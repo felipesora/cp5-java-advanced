@@ -1,0 +1,39 @@
+package br.com.cp5_java_advanced.dto;
+
+import br.com.cp5_java_advanced.model.Usuario;
+import br.com.cp5_java_advanced.model.enums.Perfil;
+import jakarta.validation.constraints.*;
+import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+public class UsuarioRequestDTO {
+
+    @NotBlank(message = "O nome é obrigatório")
+    @Size(min = 3, max = 150, message = "O nome deve ter entre 3 e 150 caracteres")
+    private String nome;
+
+    @NotBlank(message = "O e-mail é obrigatório")
+    @Email(message = "E-mail inválido")
+    @Size(max = 150, message = "O e-mail deve ter no máximo 150 caracteres")
+    private String email;
+
+    @NotBlank(message = "A senha é obrigatória")
+    @Size(min = 6, max = 150, message = "A senha deve ter entre 6 e 150 caracteres")
+    private String senha;
+
+    @NotNull(message = "O perfil do usuário é obrigatório")
+    private Perfil perfil;
+
+    public Usuario toEntity(PasswordEncoder passwordEncoder) {
+        Usuario usuario = new Usuario();
+        usuario.setNome(this.nome);
+        usuario.setEmail(this.email);
+        usuario.setSenha(passwordEncoder.encode(this.senha));
+        usuario.setPerfil(this.perfil);
+        return usuario;
+    }
+}

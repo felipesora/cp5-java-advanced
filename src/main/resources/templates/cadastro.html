@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" th:href="@{/css/global.css}" />
     <link rel="stylesheet" th:href="@{/css/cadastro.css}" />
+    <script th:src="@{/js/form-cadastro.js}" defer></script>
 </head>
 <body>
     <main>
@@ -21,17 +22,7 @@
                 </div>
                 
                 <div class="cadastro-body">
-                    <div class="error-message" id="error-message">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <span id="error-text">Erro no cadastro. Verifique os dados informados.</span>
-                    </div>
-                    
-                    <div class="success-message" id="success-message">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Cadastro realizado com sucesso!</span>
-                    </div>
-                    
-                    <form id="cadastro-form">
+                    <form id="cadastro-form" action="/cadastrar" method="post" th:object="${usuario}">
                         <div class="form-group">
                             <label for="nome">
                                 <i class="fas fa-user"></i>
@@ -39,7 +30,7 @@
                             </label>
                             <div class="input-with-icon">
                                 <i class="fas fa-user"></i>
-                                <input type="text" class="form-control" id="nome" placeholder="Seu nome completo" required>
+                                <input type="text" class="form-control" id="nome" name="nome" placeholder="Seu nome completo" required th:field="*{nome}">
                             </div>
                         </div>
                         
@@ -50,7 +41,7 @@
                             </label>
                             <div class="input-with-icon">
                                 <i class="fas fa-at"></i>
-                                <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required th:field="*{email}">
                             </div>
                         </div>
                         
@@ -61,8 +52,20 @@
                             </label>
                             <div class="input-with-icon">
                                 <i class="fas fa-lock"></i>
-                                <input type="password" class="form-control" id="senha" placeholder="Crie uma senha segura" required>
+                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Crie uma senha segura" required th:field="*{senha}">
                             </div>
+                        </div>
+
+                        <div class="container_mensagem_cadastro" id="validacaoMensagem"></div>
+
+                        <div class="success-message" id="cadastroSucesso" th:if="${mensagemSucesso}">
+                            <i class="fas fa-check-circle"></i>
+                            <p th:text="${mensagemSucesso}"></p>
+                        </div>
+
+                        <div class="error-message" id="loginMessage" th:if="${mensagemErro}">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p th:text="${mensagemErro}"></p>
                         </div>
                         
                         <button type="submit" class="cadastro-btn" id="cadastro-btn">

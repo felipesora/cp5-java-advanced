@@ -21,17 +21,12 @@
                 </div>
                 
                 <div class="login-body">
-                    <div class="error-message" id="error-message">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <span>E-mail ou senha incorretos. Tente novamente.</span>
-                    </div>
+<!--                    <div class="error-message" id="error-message">-->
+<!--                        <i class="fas fa-exclamation-circle"></i>-->
+<!--                        <span>E-mail ou senha incorretos. Tente novamente.</span>-->
+<!--                    </div>-->
                     
-                    <div class="success-message" id="success-message">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Login realizado com sucesso!</span>
-                    </div>
-                    
-                    <form id="login-form">
+                    <form id="login-form" action="/login" method="post">
                         <div class="form-group">
                             <label for="email">
                                 <i class="fas fa-envelope"></i>
@@ -39,7 +34,7 @@
                             </label>
                             <div class="input-with-icon">
                                 <i class="fas fa-at"></i>
-                                <input type="email" class="form-control" id="email" placeholder="seu@email.com" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="seu@email.com" required>
                             </div>
                         </div>
                         
@@ -50,17 +45,22 @@
                             </label>
                             <div class="input-with-icon">
                                 <i class="fas fa-lock"></i>
-                                <input type="password" class="form-control" id="password" placeholder="Sua senha" required>
+                                <input type="password" class="form-control" id="password" name="senha" placeholder="Sua senha" required>
                             </div>
                         </div>
-                        
+
+                        <div class="error-message" id="loginMessage" th:if="${param.error}" >
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p th:text="'Email ou senha inválidos.'"></p>
+                        </div>
+
                         <button type="submit" class="login-btn">
                             <i class="fas fa-sign-in-alt"></i>
                             Entrar no Sistema
                         </button>
-                        
+
                         <div class="login-footer">
-                            <p>Não tem uma conta? <a href="cadastro.html">Cadastrar-se</a></p>
+                            <p>Não tem uma conta? <a href="/cadastrar">Cadastrar-se</a></p>
                         </div>
                     </form>
                 </div>
