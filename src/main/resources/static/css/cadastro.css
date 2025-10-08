@@ -1,0 +1,232 @@
+.container_cadastro {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Main Content */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+}
+
+.cadastro-container {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.cadastro-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 35px 30px;
+    text-align: center;
+}
+
+.cadastro-icon {
+    font-size: 50px;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+}
+
+.cadastro-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.cadastro-header p {
+    opacity: 0.9;
+    font-size: 16px;
+}
+
+.cadastro-body {
+    padding: 35px 30px;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group label i {
+    color: var(--accent-color);
+    width: 20px;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.input-with-icon i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 15px 14px 45px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: all 0.3s;
+    font-size: 16px;
+    background-color: #F8FAFC;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background-color: white;
+}
+
+.password-requirements {
+    background-color: #F8FAFC;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+.password-requirements h4 {
+    color: var(--text-color);
+    margin-bottom: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.password-requirements ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.password-requirements li {
+    margin-bottom: 5px;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.password-requirements li i {
+    font-size: 12px;
+    width: 16px;
+}
+
+.requirement-valid {
+    color: var(--success-color);
+}
+
+.requirement-invalid {
+    color: var(--text-light);
+}
+
+.cadastro-btn {
+    background-color: var(--success-color);
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.cadastro-btn:hover {
+    background-color: #0DA271;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.cadastro-btn:disabled {
+    background-color: var(--text-light);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.cadastro-footer {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.cadastro-footer a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.cadastro-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Error Message */
+.error-message {
+    display: none;
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    align-items: center;
+    gap: 10px;
+    border-left: 4px solid var(--danger-color);
+}
+
+/* Success Message */
+.success-message {
+    display: none;
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    align-items: center;
+    gap: 10px;
+    border-left: 4px solid var(--success-color);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .cadastro-container {
+        margin: 0 15px;
+    }
+
+    .cadastro-header {
+        padding: 25px 20px;
+    }
+
+    .cadastro-body {
+        padding: 25px 20px;
+    }
+}
