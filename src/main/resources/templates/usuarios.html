@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Usuários - Gestão de Ferramentas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" th:href="@{/css/global.css}" />
+    <link rel="stylesheet" th:href="@{/css/usuarios.css}" />
+</head>
+<body>
+<div th:replace="fragments/header :: headerFragment"></div>
+
+<main>
+    <div class="container">
+        <div class="page-header">
+            <div class="page-title">
+                <i class="fas fa-users"></i>
+                <h1>Usuários Cadastrados</h1>
+            </div>
+            <div class="botoes-titulo">
+                <a href="/ferramentas" class="btn-back">
+                    <i class="fas fa-arrow-left"></i>
+                    Voltar
+                </a>
+
+                <a href="#" class="add-user-btn">
+                    <i class="fas fa-user-plus"></i>
+                    Novo Usuário
+                </a>
+            </div>
+
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters">
+            <h3>
+                <i class="fas fa-filter"></i>
+                Filtrar Usuários
+            </h3>
+            <form th:action="@{/usuarios}" method="get">
+                <div class="filter-form">
+                    <div class="form-group">
+                        <label for="filter-name">Nome</label>
+                        <input type="text" class="form-control" id="filter-name" name="nome" placeholder="Digite o nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="filter-email">E-mail</label>
+                        <input type="text" class="form-control" id="filter-email" name="email" placeholder="Digite o e-mail">
+                    </div>
+                    <div class="filter-actions">
+                        <button class="filter-btn" id="apply-filter" type="submit">
+                            <i class="fas fa-search"></i>
+                            Filtrar
+                        </button>
+                        <button class="clear-btn" id="clear-filter">
+                            <i class="fas fa-times"></i>
+                            Limpar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- Tabela de Usuários -->
+        <div class="users-table-container">
+            <div class="table-header">
+                <h3>
+                    <i class="fas fa-list"></i>
+                    Lista de Usuários
+                </h3>
+            </div>
+
+            <table class="users-table">
+                <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>E-mail</th>
+                    <th>Permissão</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+
+                <tbody id="users-table-body">
+                    <tr th:each="usuario : ${usuarios}">
+                        <td th:text="${usuario.nome}">João Silva</td>
+                        <td th:text="${usuario.email}">joao.silva@empresa.com</td>
+                        <td>
+                            <span th:if="${usuario.perfil.toString() == 'ADMIN'}" class="badge_perfil badge_admin">
+                                <i class="fas fa-shield-alt"></i> ADMIN
+                            </span>
+                            <span th:if="${usuario.perfil.toString() == 'COMUM'}" class="badge_perfil badge_comum">
+                                <i class="fas fa-user"></i> COMUM
+                            </span>
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <a th:href="@{/usuarios/editar/{id}(id=${usuario.id})}" class="edit-btn" data-id="${user.id}">
+                                    <i class="fas fa-edit"></i>
+                                    Editar
+                                </a>
+                                <button class="delete-btn" data-id="${user.id}">
+                                    <i class="fas fa-trash"></i>
+                                    Excluir
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr th:if="${#lists.isEmpty(usuarios)}">
+                        <td colspan="4">
+                            <div class="lista_vazia">
+                                <i class="fas fa-users-slash"></i>
+                                <h3>Nenhum usuário encontrado</h3>
+                                <p th:if="${param.nome != null or param.email != null}">
+                                    Tente ajustar os filtros de busca.
+                                </p>
+                                <p th:unless="${param.nome != null or param.email != null}">
+                                    Clique no botão "Cadastrar Usuário" para adicionar o primeiro usuário.
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <i class="fas fa-users"></i>
+                <h3>Nenhum usuário encontrado</h3>
+                <p>Não há usuários correspondentes aos filtros aplicados.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div th:replace="fragments/footer :: footerFragment"></div>
+
+<script>
+    const clearBtn = document.getElementById('clear-filter');
+
+    clearBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = '/usuarios';
+    })
+</script>
+</body>
+</html>

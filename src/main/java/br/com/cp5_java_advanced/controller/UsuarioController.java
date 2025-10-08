@@ -64,7 +64,7 @@ public class UsuarioController {
 
         model.addAttribute("usuarios", usuarios);
 
-        return "lista-usuarios";
+        return "usuarios";
     }
 
     @GetMapping("/usuarios/cadastrar")
