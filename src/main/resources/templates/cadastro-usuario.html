@@ -33,16 +33,7 @@
                 </div>
                 
                 <div class="form-body">
-                    <div class="error-message" id="error-message">
-                        <i class="fas fa-exclamation-circle"></i>
-                        <span id="error-text">Erro no cadastro. Verifique os dados informados.</span>
-                    </div>
-                    
-                    <div class="success-message" id="success-message">
-                        <i class="fas fa-check-circle"></i>
-                        <span>Usuário cadastrado com sucesso!</span>
-                    </div>
-                    
+
                     <form id="user-form" th:action="@{/usuarios/cadastrar}" th:object="${usuarioDTO}" method="post">
                         <div class="form-grid">
                             <div class="form-group">
