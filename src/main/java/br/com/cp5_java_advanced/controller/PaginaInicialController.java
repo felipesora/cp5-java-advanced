@@ -10,6 +10,6 @@ public class PaginaInicialController {
 
     @GetMapping
     public String paginaInicial() {
-        return "pagina-inicial";
+        return "index";
     }
 }
