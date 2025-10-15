@@ -99,12 +99,10 @@ spring.datasource.password=root
 
 ## 🌐 Deploy da Aplicação
 
-Caso queira executar a versão em deploy, é necessário utilizar as credenciais padrão:
-```makefile
-Usuário: postgres  
-Senha: root
-```
-🔗 Link do Deploy: [https://seu-link-deploy-aqui.com](https://seu-link-deploy-aqui.com)
+A aplicação **Java Spring Boot MVC** foi hospedada no **Render**, juntamente com um **banco de dados PostgreSQL** também provisionado na mesma plataforma.
+O deploy permite acesso público à aplicação e integração completa entre backend e banco na nuvem.
+
+🔗 Link do Deploy: [https://cp5-mvc-java-advanced.onrender.com/](https://cp5-mvc-java-advanced.onrender.com/)
 
 ---
 
